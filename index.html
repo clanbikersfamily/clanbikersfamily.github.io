@@ -103,9 +103,10 @@
     max-width:1140px; margin:0 auto;
   }
   @media (max-width:900px){ .nav{ padding:14px 20px; } }
-  .brand{ display:flex; align-items:center; gap:10px; }
-  .brand img{ height:34px; width:34px; border-radius:50%; border:1px solid var(--line); }
-  .brand span{ font-family:var(--display); font-size:1.25rem; color:#fff; letter-spacing:.04em; }
+  .brand{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .brand img{ height:34px; width:34px; border-radius:50%; border:1px solid var(--line); flex-shrink:0; }
+  .brand span{ font-family:var(--display); font-size:1.25rem; color:#fff; letter-spacing:.04em; white-space:nowrap; }
+  @media (max-width:380px){ .brand span{ font-size:1.02rem; } }
 
   .nav-links{ display:flex; align-items:center; gap:28px; }
   .nav-links a{
@@ -140,9 +141,11 @@
   /* ============ HERO ============ */
   .hero{
     position:relative;
+    --bleed-l: 66px;
+    --bleed-r: 24px;
     min-height:100svh;
     display:flex; flex-direction:column; justify-content:center;
-    padding:140px 24px 80px 66px;
+    padding:140px var(--bleed-r) 80px var(--bleed-l);
     background:
       radial-gradient(ellipse 900px 500px at 80% 20%, rgba(242,169,59,.10), transparent 60%),
       radial-gradient(ellipse 700px 500px at 10% 90%, rgba(44,143,137,.12), transparent 60%),
@@ -150,7 +153,7 @@
     overflow:hidden;
     border-bottom:1px solid var(--line);
   }
-  @media (max-width:900px){ .hero{ padding-left:24px; } }
+  @media (max-width:900px){ .hero{ --bleed-l: 24px; padding-left:var(--bleed-l); } }
   .hero-content{ max-width:760px; }
   .hero .eyebrow{ display:inline-block; margin-bottom:18px; }
   .hero h1{
@@ -158,6 +161,7 @@
     line-height:.94;
     text-transform:uppercase;
   }
+  @media (max-width:380px){ .hero h1{ font-size:clamp(2.6rem, 13vw, 6.4rem); } }
   .hero h1 em{ font-style:normal; color:var(--amber); }
   .hero p.lead{
     margin:22px 0 34px; max-width:52ch;
@@ -340,17 +344,6 @@
     font-size:.78rem; color:var(--chrome-dim); font-family:var(--mono);
   }
 
-  /* floating whatsapp */
-  .float-wa{
-    position:fixed; right:22px; bottom:22px; z-index:45;
-    width:56px; height:56px; border-radius:50%;
-    background:var(--teal); display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 24px rgba(0,0,0,.4);
-    transition:transform .25s ease;
-  }
-  .float-wa:hover{ transform:scale(1.08); }
-  .float-wa svg{ width:26px; height:26px; fill:#fff; }
-
   /* ============ LIGHTBOX ============ */
   .lightbox{
     position:fixed; inset:0; z-index:100; display:none;
@@ -407,11 +400,11 @@
       <h1>Clan Biker's<br><em>Family</em></h1>
       <p class="lead">Un club de motos nacido el 14 de julio de 2023, sin jerarquías ni figuras de autoridad única: una familia sobre ruedas que rueda, se cuida y crece junta.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://wa.me/573234385419?text=Me%20gustar%C3%ADa%20pertenecer%20a%20su%20familia." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a class="btn btn-primary" href="#unete">Escríbenos</a>
         <a class="btn btn-ghost" href="#aventuras">Ver aventuras</a>
       </div>
     </div>
-    <div class="stats reveal" style="margin:64px -24px -80px -66px; width:calc(100% + 24px + 66px);">
+    <div class="stats reveal" style="margin:64px calc(-1 * var(--bleed-r)) -80px calc(-1 * var(--bleed-l)); width:calc(100% + var(--bleed-r) + var(--bleed-l));">
       <div class="stat"><div class="num">14.07.2023</div><div class="lbl">Fundación del clan</div></div>
       <div class="stat"><div class="num">07</div><div class="lbl">Destinos recorridos</div></div>
       <div class="stat"><div class="num">09</div><div class="lbl">Momentos en galería</div></div>
@@ -497,24 +490,12 @@
       </div>
 
       <div class="ig-embed reveal">
-        <!--
-          CÓMO ACTIVAR ESTE FEED (gratis, 5 minutos):
-          1. Entra a https://lightwidget.com y crea una cuenta gratis.
-          2. Conecta la cuenta de Instagram del Clan (debe ser cuenta Business o Creator).
-          3. Crea un widget, elige el diseño y copia el "widget ID" que te entrega.
-          4. Reemplaza AQUI-TU-WIDGET-ID en el src del iframe de abajo por ese ID.
-          El feed se actualiza solo cada cierto tiempo (no es instantáneo al publicar).
-        -->
-        <iframe
-          src="https://cdn.lightwidget.com/widgets/AQUI-TU-WIDGET-ID.html"
-          scrolling="no"
-          class="lightwidget-widget"
-          style="width:100%; border:0; overflow:hidden;">
-        </iframe>
+        <!-- LightWidget WIDGET -->
         <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+        <iframe src="//lightwidget.com/widgets/9e5ca0e523da52868a524aaf732802cf.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
 
         <div class="ig-fallback">
-          <p>¿Aún no configuras el widget? Mientras tanto, síguenos directo en Instagram:</p>
+          <p>¿Prefieres verlo directo en la app?</p>
           <a class="btn btn-ghost" href="https://www.instagram.com/clan_bikers_family" target="_blank" rel="noopener">Ver perfil en Instagram</a>
         </div>
       </div>
@@ -617,10 +598,21 @@
       <div class="section-head reveal">
         <span class="eyebrow">Súmate a la ruta</span>
         <h2>¡Anímate a ser miembro del Clan!</h2>
-        <p>Escríbenos contándonos quién eres y te respondemos directo por WhatsApp.</p>
+        <p>Escríbenos contándonos quién eres y te respondemos por correo o Instagram.</p>
       </div>
       <div class="join-grid">
-        <form class="cform reveal" id="contactForm" novalidate>
+        <form class="cform reveal" id="contactForm" action="https://formspree.io/f/AQUI-TU-FORM-ID" method="POST" novalidate>
+          <!--
+            CÓMO ACTIVAR EL ENVÍO POR CORREO (gratis, 5 minutos):
+            1. Entra a https://formspree.io y crea una cuenta gratis con el correo
+               clanbikersfamily2023@gmail.com (o el que prefieran recibir los mensajes).
+            2. Crea un nuevo formulario ("New Form") y copia el "Form ID" que te da
+               (algo como xoqzabcd).
+            3. Reemplaza AQUI-TU-FORM-ID en el atributo action de arriba por ese ID.
+            4. Formspree te pedirá confirmar el primer envío de prueba desde tu correo.
+            El plan gratis permite hasta 50 mensajes al mes.
+          -->
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde la web — Clan Biker's Family">
           <div class="cform-row">
             <div class="field" data-field="nombre">
               <label for="cf-nombre">Nombre completo</label>
@@ -628,7 +620,7 @@
               <div class="field-msg"></div>
             </div>
             <div class="field" data-field="telefono">
-              <label for="cf-telefono">Teléfono / WhatsApp</label>
+              <label for="cf-telefono">Teléfono</label>
               <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel" required>
               <div class="field-msg"></div>
             </div>
@@ -663,9 +655,9 @@
         </form>
 
         <div class="channels reveal">
-          <a class="channel" href="https://wa.me/573234385419?text=Me%20gustar%C3%ADa%20pertenecer%20a%20su%20familia." target="_blank" rel="noopener">
-            <span class="ic">☎</span>
-            <span class="tx"><b>WhatsApp directo</b><span>+57 323 438 5419</span></span>
+          <a class="channel" href="https://ig.me/m/clan_bikers_family" target="_blank" rel="noopener">
+            <span class="ic">◎</span>
+            <span class="tx"><b>Mensaje directo</b><span>Instagram @clan_bikers_family</span></span>
           </a>
           <a class="channel" href="https://www.instagram.com/clan_bikers_family" target="_blank" rel="noopener">
             <span class="ic">◎</span>
@@ -710,9 +702,6 @@
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/573234385419?text=Me%20gustar%C3%ADa%20pertenecer%20a%20su%20familia." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0012.04 2m0 1.8a8.1 8.1 0 018.1 8.11c0 4.48-3.63 8.11-8.1 8.11a8.1 8.1 0 01-4.14-1.14l-.3-.17-3.11.82.83-3.03-.19-.31a8.07 8.07 0 01-1.25-4.29c0-4.48 3.65-8.1 8.16-8.1m4.48 5.79c-.15-.34-.42-.34-.65-.35h-.55c-.19 0-.5.07-.76.35-.26.28-1 .97-1 2.38s1.02 2.76 1.16 2.95c.15.19 1.98 3.15 4.88 4.29.68.29 1.21.46 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.68-.68 1.92-1.35.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.55-.33-.28-.15-1.68-.83-1.94-.92-.26-.1-.45-.15-.64.14-.19.29-.74.92-.9 1.11-.17.19-.33.21-.62.07-.28-.15-1.2-.44-2.28-1.4-.84-.75-1.41-1.68-1.57-1.96-.17-.29-.02-.44.13-.58.13-.13.28-.34.42-.5.14-.17.19-.29.28-.48.1-.19.05-.36-.02-.5-.07-.14-.63-1.56-.88-2.14"/></svg>
-</a>
 
 <div class="lightbox" id="lightbox">
   <div class="lb-inner">
@@ -809,10 +798,10 @@
   lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-  // --- formulario de contacto propio ---
+  // --- formulario de contacto propio (envía por correo vía Formspree) ---
   const contactForm = document.getElementById('contactForm');
   const cformStatus = document.getElementById('cformStatus');
-  const WHATSAPP_NUMBER = '573234385419';
+  const cformSubmitBtn = contactForm.querySelector('.cform-submit');
 
   function setFieldError(name, message){
     const field = contactForm.querySelector('[data-field="' + name + '"]');
@@ -836,7 +825,7 @@
     return ok;
   }
 
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = {
       nombre: contactForm.nombre.value,
@@ -852,21 +841,33 @@
       return;
     }
 
-    const lines = [
-      'Hola Clan Biker\'s Family, les escribo desde la página web.',
-      'Nombre: ' + data.nombre,
-      'Teléfono: ' + data.telefono,
-      data.email ? ('Correo: ' + data.email) : null,
-      'Motivo: ' + data.motivo,
-      'Mensaje: ' + data.mensaje
-    ].filter(Boolean).join('\n');
+    cformSubmitBtn.disabled = true;
+    cformSubmitBtn.textContent = 'Enviando...';
+    cformStatus.className = 'cform-status';
+    cformStatus.textContent = '';
 
-    const waURL = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines);
+    try{
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
 
-    cformStatus.className = 'cform-status ok';
-    cformStatus.textContent = 'Todo listo. Abriendo WhatsApp para enviar tu mensaje al Clan...';
-    window.open(waURL, '_blank', 'noopener');
-    contactForm.reset();
+      if(response.ok){
+        cformStatus.className = 'cform-status ok';
+        cformStatus.textContent = '¡Mensaje enviado! Te responderemos pronto por correo.';
+        contactForm.reset();
+      } else {
+        cformStatus.className = 'cform-status bad';
+        cformStatus.textContent = 'No se pudo enviar. Intenta de nuevo o escríbenos por Instagram.';
+      }
+    } catch(err){
+      cformStatus.className = 'cform-status bad';
+      cformStatus.textContent = 'No se pudo enviar. Intenta de nuevo o escríbenos por Instagram.';
+    } finally {
+      cformSubmitBtn.disabled = false;
+      cformSubmitBtn.textContent = 'Enviar mensaje';
+    }
   });
 </script>
 </body>
