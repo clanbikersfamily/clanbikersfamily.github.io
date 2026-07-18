@@ -243,6 +243,13 @@
     border:1px solid var(--line); border-radius:3px; background:var(--asphalt);
     padding:18px; min-height:120px;
   }
+  .ig-embed-scroll{
+    max-height:640px; overflow-y:auto; overflow-x:hidden;
+    scrollbar-width:thin; scrollbar-color:var(--amber-dim) var(--asphalt-2);
+  }
+  .ig-embed-scroll::-webkit-scrollbar{ width:8px; }
+  .ig-embed-scroll::-webkit-scrollbar-track{ background:var(--asphalt-2); }
+  .ig-embed-scroll::-webkit-scrollbar-thumb{ background:var(--amber-dim); border-radius:4px; }
   .ig-embed iframe{ display:block; min-height:420px; }
   .ig-fallback{
     margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);
@@ -406,7 +413,7 @@
     </div>
     <div class="stats reveal" style="margin:64px calc(-1 * var(--bleed-r)) -80px calc(-1 * var(--bleed-l)); width:calc(100% + var(--bleed-r) + var(--bleed-l));">
       <div class="stat"><div class="num">14.07.2023</div><div class="lbl">Fundación del clan</div></div>
-      <div class="stat"><div class="num">29</div><div class="lbl">Destinos recorridos</div></div>
+      <div class="stat"><div class="num">46</div><div class="lbl">Destinos recorridos</div></div>
       <div class="stat"><div class="num">09</div><div class="lbl">Momentos en galería</div></div>
       <div class="stat"><div class="num">Horizontal</div><div class="lbl">Modelo de liderazgo</div></div>
     </div>
@@ -490,8 +497,10 @@
       </div>
 
       <div class="ig-embed reveal">
-        <!-- SnapWidget -->
-        <iframe src="https://snapwidget.com/embed/1127288" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; height:510px;" title="Posts from Instagram"></iframe>
+        <div class="ig-embed-scroll">
+          <!-- SnapWidget -->
+          <iframe src="https://snapwidget.com/embed/1127289" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; height:1344px;" title="Posts from Instagram"></iframe>
+        </div>
 
         <div class="ig-fallback">
           <p>¿Prefieres verlo directo en la app?</p>
